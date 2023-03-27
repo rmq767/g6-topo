@@ -10,6 +10,7 @@
   "dependencies": {
     "@antv/g6": "^4.5.5",
     "core-js": "^3.8.3",
+    "element-ui": "^2.4.5",
     "vue": "^2.6.14",
     "vue-router": "^3.2.0"
   },
@@ -22,6 +23,7 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "vue-cli-plugin-element": "~1.0.1",
     "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
