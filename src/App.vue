@@ -1,19 +1,8 @@
 <template>
   <div id="app">
-    <topo />
+    <router-view />
   </div>
 </template>
-
-<script>
-import topo from "./components/topo.vue";
-
-export default {
-  name: "App",
-  components: {
-    topo,
-  },
-};
-</script>
 
 <style>
 html,
