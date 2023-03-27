@@ -5,7 +5,7 @@
         >只读操作</el-button
       >
       <el-button type="primary" size="mini" @click="getData"
-        >获取当前数据</el-button
+        >获取数据</el-button
       >
       <el-collapse v-model="activeNames">
         <el-collapse-item title="节点" name="node">
