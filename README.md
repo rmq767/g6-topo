@@ -1,3 +1,12 @@
+```bash
+# 仓库克隆
+git clone https://github.com/rmq767/g6-topo.git
+# 安装包
+npm i
+# 开启服务
+npm run serve
+```
+
 # g6-topo
 ## 实现的功能
 
