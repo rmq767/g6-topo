@@ -70,9 +70,15 @@ export default {
     this.initG6();
   },
   methods: {
+    /**
+     * @description 设置添加节点、边、默认模式
+     */
     setMode(value) {
       graph.setMode(value);
     },
+    /**
+     * @description 初始化G6
+     */
     initG6() {
       const container = document.getElementById("container");
       const width = container.scrollWidth;
@@ -155,14 +161,22 @@ export default {
       graph.on("node:click", this.onNodeClick);
       graph.on("edge:click", this.onEdgeClick);
     },
+    /**
+     * @description 获取节点数据
+     */
     onNodeClick(e) {
       this.mode = "node";
+      // 拿到节点的数据
       const item = e.item.getModel();
       this.nodeData.label = item.label;
       this.nodeData.id = item.id;
     },
+    /**
+     * @description 获取边数据
+     */
     onEdgeClick(e) {
       this.mode = "edge";
+      // 拿到边的数据
       const item = e.item.getModel();
       this.edgeData.label = item.label;
       this.edgeData.id = item.id;
@@ -196,7 +210,7 @@ export default {
       });
     },
     /**
-     * @description 添加边
+     * @description 注册点击添加边
      */
     addEdge() {
       G6.registerBehavior("click-add-edge", {
@@ -256,45 +270,33 @@ export default {
         },
       });
     },
-    onClick(ev) {
-      const self = this;
-      const node = ev.item;
-      const graph = self.graph;
-      // The position where the mouse clicks
-      // const point = { x: ev.x, y: ev.y };
-      const model = node.getModel();
-      if (self.addingEdge && self.edge) {
-        graph.updateItem(self.edge, {
-          target: model.id,
-        });
-
-        self.edge = null;
-        self.addingEdge = false;
-      } else {
-        // Add anew edge, the end node is the current node user clicks
-        self.edge = graph.addItem("edge", {
-          source: model.id,
-          target: model.id,
-        });
-        self.addingEdge = true;
-      }
-    },
+    /**
+     * @description 更改节点信息
+     */
     changeNodeName() {
       if (this.nodeData.id) {
         const item = graph.findById(this.nodeData.id);
+        // 这里可以更改所有节点数据，根据需求来
         graph.updateItem(item, {
           label: this.nodeData.label,
         });
       }
     },
+    /**
+     * @description 更改边信息
+     */
     changeEdgeName() {
       if (this.edgeData.id) {
         const item = graph.findById(this.edgeData.id);
+        // 这里可以更改所有边数据，根据需求来
         graph.updateItem(item, {
           label: this.edgeData.label,
         });
       }
     },
+    /**
+     * @description 获取当前拓扑图数据
+     */
     getData() {
       console.log(graph.save());
     },
