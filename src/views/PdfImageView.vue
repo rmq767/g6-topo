@@ -15,7 +15,6 @@
         <el-button type="primary" size="mini" @click="showNavigator">{{
           showNav ? "隐藏导航栏" : "展示导航栏"
         }}</el-button>
-        <el-button type="primary" size="mini" @click="exit">退出</el-button>
       </div>
       <div class="canvas-content">
         <canvas id="pdf-canvas"></canvas>
@@ -96,6 +95,9 @@ export default {
         "https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg",
       ];
     },
+    /**
+     * @description 初始化canvas
+     */
     initCanvas() {
       const canvasParent = document.querySelector(".pdf-view");
       const canvas = document.getElementById("pdf-canvas");
@@ -106,6 +108,9 @@ export default {
       ctx = canvas.getContext("2d");
       this.drawImage();
     },
+    /**
+     * @description 画图片
+     */
     drawImage(src, scale = this.canvas.scale) {
       const img = new Image();
       img.onload = () => {
@@ -149,35 +154,47 @@ export default {
         img.src = this.imgList[this.activeImageIndex];
       }
     },
+    /**
+     * @description 选择图片展示
+     */
     changeImage(src, index) {
       this.activeImageIndex = index;
       this.canvas.scale = 1;
       ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.drawImage(src);
     },
+    /**
+     * @description 展示侧边
+     */
     showNavigator() {
       this.showNav = !this.showNav;
     },
-    exit() {},
+    /**
+     * @description 禁止右键菜单
+     */
     disabledContextMenu(e) {
       e.preventDefault();
       return false;
     },
-    disabledImageContextMenu(e) {
-      console.log(1);
-      e.preventDefault();
-      return false;
-    },
+    /**
+     * @description 放大
+     */
     toBig() {
       this.canvas.scale += 0.5;
       ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.drawImage(this.imgList[this.activeImageIndex]);
     },
+    /**
+     * @description 缩小
+     */
     toSmall() {
       this.canvas.scale -= 0.5;
       ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.drawImage(this.imgList[this.activeImageIndex]);
     },
+    /**
+     * @description 上一个图片
+     */
     preImage() {
       if (this.activeImageIndex === 0) {
         return;
@@ -189,6 +206,9 @@ export default {
         );
       }
     },
+    /**
+     * @description 下一个图片
+     */
     nextImage() {
       if (this.activeImageIndex === this.imgList.length) {
         return;

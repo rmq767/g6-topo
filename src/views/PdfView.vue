@@ -1,5 +1,6 @@
 <template>
   <div class="pdf-container" v-loading="loading">
+    <input type="file" @change="getPdfFile" />
     <div class="handle-btn">
       <div class="left">
         <el-button type="primary" size="mini" @click="triggerCollapse">{{
@@ -77,9 +78,9 @@
 
 <script>
 import pdf from "vue-pdf";
-var loadingTask = pdf.createLoadingTask(
-  "http://storage.xuetangx.com/public_assets/xuetangx/PDF/PlayerAPI_v1.0.6.pdf"
-);
+// var loadingTask = pdf.createLoadingTask(
+//   "http://storage.xuetangx.com/public_assets/xuetangx/PDF/PlayerAPI_v1.0.6.pdf"
+// );
 export default {
   name: "pdfView",
   components: {
@@ -87,8 +88,8 @@ export default {
   },
   data() {
     return {
-      loading: true, //加载
-      pdfData: loadingTask, //url
+      loading: false, //加载
+      pdfData: null, //url
       currentPage: 1, //当前页数
       pageTotalNum: 1, //总页数
       imgList: [], //base64图片列表
@@ -110,9 +111,18 @@ export default {
     },
   },
   mounted() {
-    this.loadPdf();
+    // this.loadPdf();
   },
   methods: {
+    getPdfFile(e) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.pdfData = pdf.createLoadingTask(e.target.result);
+        this.loadPdf();
+      };
+      reader.readAsDataURL(file);
+    },
     /**
      * @description 加载PDF获取canvas图片
      */
