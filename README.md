@@ -25,3 +25,7 @@ npm run serve
 
 
 ## About页面还有添加边节点的功能，修改边和节点信息，获取数据
+## pdfview页面
+使用Vue-PDF实现预览、翻页、放大缩小、侧边栏预览
+## pdfimageview页面
+使用canvas实现图片的预览
